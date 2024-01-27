@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
 #include <time.h>
+#include <winbase.h>
+#include <windows.h>
 #include <winuser.h>
 
 void vehicleIn()
 {
+
     char vehNum[15];
-     int userClickBtn;
+    int userClickBtn;
     system("CLS");
     printf("\n\t\tVehicle Entry Dashboard\n\n\n");
 
@@ -16,20 +18,30 @@ void vehicleIn()
     {
 
         char vehicleNum[15];
+        char vehInTime[20];
     } readVehicleNum;
 
     FILE *vehicleEntryPointer;
-    vehicleEntryPointer = fopen("vehicle-entry.txt", "w");
+    vehicleEntryPointer = fopen("vehicle-entry.txt", "a+");
     printf("Vehicle Number : ");
     scanf("%s", vehNum);
     strcpy(readVehicleNum.vehicleNum, vehNum);
-    // printf("Vehicle num = %s", readVehicleNum.vehicleNum);
-    // fprintf(vehicleEntryPointer, vehNum);
     fputs(readVehicleNum.vehicleNum, vehicleEntryPointer);
-    fclose(vehicleEntryPointer);
-    printf("\n\nPress any key to go Home Page\n\n");
-    
-    
+    // fputs(, vehicleEntryPointer);
+    fprintf(vehicleEntryPointer, "Vehicle Number : %s ", readVehicleNum.vehicleNum);
+
+    // time_t seconds;
+    // seconds = time(NULL);
+    // readVehicleNum.vehInTime = &seconds;
+    // fprintf(vehicleEntryPointer, "\n%ld\n\n", readVehicleNum.vehInTime);
+
+    struct tm *local;
+    time_t myTime = time(NULL);
+    local = localtime(&myTime);
    
-    
+    fprintf(vehicleEntryPointer, "\nIn Time : %s\n\n", asctime(local));
+    // fputs(asctime(local), vehicleEntryPointer);
+
+    fclose(vehicleEntryPointer);
+    // printf("Time : %ld\n", &seconds);
 }
