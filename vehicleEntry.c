@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <winbase.h>
-#include <windows.h>
-#include <winuser.h>
+// #include <winbase.h>
+// #include <winuser.h>
 
 void vehicleIn()
 {
